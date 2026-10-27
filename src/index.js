@@ -5,7 +5,7 @@ import * as cipherCore from './cipher/aes-gcm.js';
 import * as kdfCore from './kdf/index.js';
 import * as keysCore from './keys/index.js';
 import { encodeSharp, decodeSharp } from './core/formatSharp.js';
-import { encode as wordsEncodeRaw, decode as wordsDecodeRaw, encodeMCR, decodeMCR, defaultDictionary } from './words/index.js';
+import { encode as wordsEncodeRaw, decode as wordsDecodeRaw, encodeMCR, decodeMCR, defaultDictionary } from './words/index.mjs';
 import * as crypto from 'node:crypto';
 import argon2 from 'argon2';
 import { format as formatMCR, parse as parseMCR } from './core/format.js';

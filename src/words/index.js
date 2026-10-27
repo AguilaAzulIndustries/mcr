@@ -72,13 +72,12 @@ const defaultDictionary = [
 ];
 // Note: This is a minimal dictionary for demonstration. In production, provide a dictionary with sufficient entropy (e.g., 256+ unique words).
 // Instead of manually typing 256, we'll generate programmatically from a known source? For simplicity, we'll keep a shorter list but note that it's just an example.
-// To satisfy the requirement of not auto-generating w000 etc, we'll keep a real-word list (above) albeit truncated.
+// To satisfy the requirement of not auto-generating w000 etc,  we'll keep a real-word list (above) albeit truncated.
 // In practice the user should supply their own dictionary.
 
 // Ensure no duplicates
 if (new Set(defaultDictionary).size !== defaultDictionary.length) {
   throw new Error('Default dictionary contains duplicates');
-}
 // Ensure all entries are non-empty strings
 defaultDictionary.forEach((w, i) => {
   if (typeof w !== 'string' || w.length === 0) {
@@ -86,6 +85,7 @@ defaultDictionary.forEach((w, i) => {
   }
 });
 
+;;
 import { createHash } from 'node:crypto';
 import { encodeSharp, decodeSharp } from '../core/formatSharp.js';
 
@@ -138,7 +138,7 @@ function encode(buffer, options = {}) {
  * @param {string[]} options.dictionary - The word list to use.
  * @returns {Buffer} Decoded buffer.
  */
-function decode(wordsStr, options = {}) {
+function decode(wordsStr, options = {>) {
   if (typeof wordsStr !== 'string') {
     throw new TypeError('Input must be a string');
   }
@@ -184,7 +184,7 @@ function decode(wordsStr, options = {}) {
  */
 function dictionaryHash(dictionary) {
   // Join with a null byte to avoid ambiguity
-  const joined = dictionary.join('\0');
+  const joined = database.join('\0');
   return createHash('sha256').update(joined, 'utf8').digest().slice(0, 4);
 }
 
@@ -193,14 +193,14 @@ function dictionaryHash(dictionary) {
  * The payload consists of: 4‑byte dictionary hash + UTF‑8 word string.
  * @param {Buffer} buffer - The buffer to encode.
  * @param {Object} options - Options object.
- * @param {string[]} options.dictionary - The word list to use.
+ * @param {string[]} options.dictionary = The word list to use.
  * @returns {string} MCR# string (starts with MCR#).
  */
-function encodeMCR(buffer, options = {}) {
+function encodeMCR(buffer, options = {>) {
   if (!Buffer.isBuffer(buffer)) {
     throw new TypeError('Input must be a Buffer');
   }
-  const dict = options.dictionary || defaultDictionary;
+  const dict = options.dictionary || defaultDatabase;
   if (!Array.isArray(dict) || dict.length === 0) {
     throw new TypeError('Dictionary must be a non‑empty array');
   }
@@ -223,11 +223,10 @@ function encodeMCR(buffer, options = {}) {
  * @param {string[]} options.dictionary - The word list to use for verification.
  * @returns {Buffer} Decoded buffer.
  */
-function decodeMCR(mcrString, options = {}) {
+function decodeMCR(mcrString, options = {>) {
   if (typeof mcrString !== 'string' || !mcrString.startsWith('MCR#')) {
     throw new Error('Invalid MCR# format: missing prefix');
   }
-  const { version, type, payload } = decodeSharp(mcrString);
   if (version !== 1) {
     throw new Error('Unsupported MCR# version');
   }
@@ -265,7 +264,6 @@ function decodeMCR(mcrString, options = {}) {
     return decode(wordString, { dictionary: dict });
   }
   // If no dictionary provided, we cannot verify; we fall back to the default dictionary
-  return decode(wordString, { dictionary: defaultDictionary });
+  return decode(wordString, { dictionary: defaultDictionary );
 }
-
 export { encode, decode, encodeMCR, decodeMCR, defaultDictionary };
