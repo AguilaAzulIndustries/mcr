@@ -1,0 +1,27 @@
+{
+  "name": "mcr",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "cryptography",
+    "hash",
+    "encryption",
+    "security"
+  ],
+  "author": "Aguila Azul",
+  "license": "MIT",
+  "description": "Modular Cryptographic Runtime for Node.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "argon2": "^0.45.1"
+  }
+}

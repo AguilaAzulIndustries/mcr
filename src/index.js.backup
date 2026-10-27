@@ -1,0 +1,51 @@
+import * as randomCore from './core/random.js';
+import * as sha256Hash from './hash/sha256.js';
+import * as passwordHash from './hash/password.js';
+import * as cipherCore from './cipher/aes-gcm.js';
+import * as kdfCore from './kdf/index.js';
+import * as keysCore from './keys/index.js';
+
+// Public API
+export const random = {
+  bytes: randomCore.bytes,
+  token: randomCore.token,
+  tokenHex: randomCore.tokenHex
+};
+
+export const hash = {
+  sha256: sha256Hash.sha256,
+  sha256String: sha256Hash.sha256String,
+  password: {
+    hash: passwordHash.hash,
+    verify: passwordHash.verify
+  }
+};
+
+export const cipher = {
+  encrypt: cipherCore.encrypt,
+  decrypt: cipherCore.decrypt
+};
+
+export const kdf = {
+  deriveSecret: kdfCore.deriveSecret,
+  generateKey: kdfCore.generateKey,
+  deriveKeyFromPassword: kdfCore.deriveKeyFromPassword
+};
+
+export const keys = {
+  generateKeyPair: keysCore.generateKeyPair,
+  signData: keysCore.signData,
+  verifySignature: keysCore.verifySignature,
+  exportKey: keysCore.exportKey,
+  importPublicKey: keysCore.importPublicKey,
+  importPrivateKey: keysCore.importPrivateKey
+};
+
+// Default export (for ES module compatibility)
+export default {
+  random,
+  hash,
+  cipher,
+  kdf,
+  keys
+};
